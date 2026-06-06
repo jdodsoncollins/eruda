@@ -59,6 +59,13 @@ It's also available on [jsDelivr](http://www.jsdelivr.com/projects/eruda) and [c
 <script>eruda.init();</script>
 ```
 
+For the latest iOS Safari, use the modern build to reduce transpilation overhead.
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/eruda/eruda.modern.js"></script>
+<script>eruda.init();</script>
+```
+
 For more detailed usage instructions, please read the documentation at [eruda.liriliri.io](https://eruda.liriliri.io/docs/)!
 
 ## Related Projects

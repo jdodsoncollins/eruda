@@ -8,11 +8,13 @@
     "not dead"
   ],
   "scripts": {
-    "ci": "npm run lint && npm run test && npm run build && npm run es5",
-    "build": "lsla shx rm -rf dist && webpack --config build/webpack.prod.js && webpack --config build/webpack.polyfill.js && node build/build && lsla shx cp README.md eruda.d.ts dist",
+    "ci": "npm run lint && npm run test && npm run build && npm run es5 && npm run test:modern-build",
+    "build": "lsla shx rm -rf dist && webpack --config build/webpack.prod.js && webpack --config build/webpack.modern.js && webpack --config build/webpack.polyfill.js && node build/build && lsla shx cp README.md eruda.d.ts dist",
+    "build:modern": "webpack --config build/webpack.modern.js",
     "build:analyser": "webpack --config build/webpack.analyser.js",
     "dev": "webpack-dev-server --config build/webpack.dev.js --host 0.0.0.0",
     "test": "karma start",
+    "test:modern-build": "node --test build/modern.test.js",
     "format": "lsla prettier \"*.{js,ts}\" \"src/**/*.{js,scss,css,json}\" \"build/*.js\" \"test/*.{js,html}\" --write",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
@@ -64,6 +66,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^5.0.0",
     "licia": "^1.44.0",
+    "lsla": "^1.0.2",
     "luna-box-model": "^1.0.1",
     "luna-console": "^1.3.6",
     "luna-data-grid": "^1.6.4",
