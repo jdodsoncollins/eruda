@@ -2,6 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const test = require('node:test')
 const assert = require('node:assert/strict')
+const zlib = require('zlib')
 
 const config = require('./webpack.modern')
 
@@ -43,4 +44,8 @@ test('modern output keeps legacy helpers out of the artifact', () => {
   assert.equal(modernCode.includes('_asyncToGenerator'), false)
   assert.equal(modernCode.includes('_classCallCheck'), false)
   assert.equal(modernCode.length < legacyCode.length, true)
+  assert.equal(
+    zlib.gzipSync(modernCode).length < zlib.gzipSync(legacyCode).length,
+    true
+  )
 })
