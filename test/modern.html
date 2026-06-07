@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Eruda Modern Demo</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 24px;
+      font: 16px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #101318;
+      color: #f2f5f8;
+    }
+    main {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    button {
+      display: block;
+      width: 100%;
+      margin: 12px 0;
+      padding: 14px 16px;
+      border: 0;
+      border-radius: 12px;
+      background: #42d392;
+      color: #07120d;
+      font: inherit;
+      font-weight: 700;
+    }
+    pre {
+      overflow: auto;
+      padding: 16px;
+      border-radius: 12px;
+      background: #1a2029;
+      color: #dbe7f3;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Eruda Modern Demo</h1>
+    <p>This page loads <code>/dist/eruda.modern.js</code> for local iOS Safari smoke testing.</p>
+
+    <button id="log">Log Console Data</button>
+    <button id="network">Fetch Test JSON</button>
+    <button id="storage">Write Local Storage</button>
+    <button id="dom">Mutate DOM</button>
+
+    <pre id="output">Ready.</pre>
+  </main>
+
+  <script src="/dist/eruda.modern.js"></script>
+  <script>
+    eruda.init()
+
+    var output = document.getElementById('output')
+
+    document.getElementById('log').onclick = function () {
+      var payload = {
+        time: new Date().toISOString(),
+        userAgent: navigator.userAgent,
+        viewport: {
+          width: window.innerWidth,
+          height: window.innerHeight,
+        },
+      }
+      console.log('modern eruda demo', payload)
+      console.table([{ name: 'legacy', file: 'eruda.js' }, { name: 'modern', file: 'eruda.modern.js' }])
+      output.textContent = JSON.stringify(payload, null, 2)
+    }
+
+    document.getElementById('network').onclick = function () {
+      fetch('/test/data.json?modern=' + Date.now())
+        .then(function (res) {
+          return res.json()
+        })
+        .then(function (data) {
+          console.info('fetched test data', data)
+          output.textContent = JSON.stringify(data, null, 2)
+        })
+        .catch(function (err) {
+          console.error(err)
+          output.textContent = err.message
+        })
+    }
+
+    document.getElementById('storage').onclick = function () {
+      var value = 'modern-' + Date.now()
+      localStorage.setItem('eruda-modern-demo', value)
+      console.info('stored localStorage value', value)
+      output.textContent = 'localStorage.eruda-modern-demo = ' + value
+    }
+
+    document.getElementById('dom').onclick = function () {
+      var item = document.createElement('p')
+      item.textContent = 'DOM mutation at ' + new Date().toLocaleTimeString()
+      document.querySelector('main').appendChild(item)
+      console.debug('appended node', item)
+      output.textContent = item.textContent
+    }
+  </script>
+</body>
+</html>
