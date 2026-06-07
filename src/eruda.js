@@ -8,6 +8,7 @@ import Snippets from './Snippets/Snippets'
 import Resources from './Resources/Resources'
 import Info from './Info/Info'
 import Sources from './Sources/Sources'
+import Audit from './Audit/Audit'
 import Settings from './Settings/Settings'
 import emitter from './lib/emitter'
 import logger from './lib/logger'
@@ -95,6 +96,7 @@ export default {
   Sources,
   Resources,
   Info,
+  Audit,
   Snippets,
   Settings,
   get(name) {

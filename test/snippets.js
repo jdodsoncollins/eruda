@@ -12,7 +12,7 @@ describe('snippets', function () {
       $btn.click()
       expect($body).toHaveCss({ outlineWidth: '2px' })
       $btn.click()
-      expect($body).toHaveCss({ outlineWidth: '0px' })
+      expect($body).toHaveCss({ outlineStyle: 'none' })
     })
 
     it('refresh page', function () {

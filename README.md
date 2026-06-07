@@ -61,6 +61,14 @@ It's also available on [jsDelivr](http://www.jsdelivr.com/projects/eruda) and [c
 
 For more detailed usage instructions, please read the documentation at [eruda.liriliri.io](https://eruda.liriliri.io/docs/)!
 
+## Audit
+
+Eruda includes an optional Audit tool for portable accessibility, performance, best-practice, and Eruda-specific checks.
+
+```js
+eruda.init({ tool: ['audit'] })
+```
+
 ## Related Projects
 
 * [eruda-android](https://github.com/liriliri/eruda-android): Simple webview with eruda loaded automatically.

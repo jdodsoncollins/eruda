@@ -1,0 +1,85 @@
+@use '../style/variable' as *;
+@use '../style/mixin' as *;
+
+#audit {
+  @include overflow-auto(y);
+  padding-top: 40px;
+  .control {
+    @include control();
+    .icon-play {
+      left: 0;
+    }
+    .icon-clear {
+      left: 40px;
+    }
+    .icon-copy {
+      left: 80px;
+    }
+    .summary {
+      display: block;
+      padding: 10px 10px 10px 120px;
+      font-size: $font-size-s;
+      color: var(--primary);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+  .group {
+    margin: 10px;
+    h2 {
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+  }
+  .result {
+    margin-bottom: 8px;
+    padding: $padding;
+    border: 1px solid var(--border);
+    background: var(--darker-background);
+    h3 {
+      font-size: $font-size;
+      color: var(--foreground);
+      span {
+        display: inline-block;
+        min-width: 75px;
+        margin-right: 8px;
+        color: var(--primary);
+      }
+    }
+    p,
+    li {
+      color: var(--primary);
+      font-size: $font-size-s;
+      user-select: text;
+      word-break: break-all;
+    }
+    ul {
+      margin-top: 8px;
+    }
+    .node {
+      margin: 8px 8px 0 0;
+      padding: 4px 6px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      color: var(--link-color);
+      background: transparent;
+      font-size: $font-size-s;
+    }
+    &.pass h3 span {
+      color: #4ebf71;
+    }
+    &.warning h3 span,
+    &.unsupported h3 span {
+      color: #d4a72c;
+    }
+    &.fail h3 span,
+    &.error h3 span {
+      color: #e15258;
+    }
+  }
+}
+
+.safe-area #audit {
+  @include safe-area(padding-bottom, 10px);
+}
